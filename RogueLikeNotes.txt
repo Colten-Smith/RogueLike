@@ -1,0 +1,14 @@
+Nouns
+    Wall ┌ ┘ ─ └ ┐
+    Door ] [ ┌─┐ └─┘
+    Key ? 
+    Lock %  
+    Player @
+    Space
+    UI
+    Map
+
+    Visual Info
+    Displayable
+
+Verbs
