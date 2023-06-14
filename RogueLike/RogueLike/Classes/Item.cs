@@ -14,7 +14,7 @@ namespace RogueLike.Classes
         public bool IsGettable { get; private set; }
         public Item()
         {
-            Sprite = ('·');
+            Sprite = (' ');
             IsSolid = false;
             IsGettable = false;
         }

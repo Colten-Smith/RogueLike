@@ -32,7 +32,7 @@ namespace RogueLike.Classes
         }
         public bool CanBeMovedTo()
         {
-            if (Item.IsSolid)
+            if (Item.IsSolid || Item.IsMovable || Item.IsGettable)
             {
                 return false;
             }

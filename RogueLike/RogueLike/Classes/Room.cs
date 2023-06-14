@@ -8,58 +8,100 @@ namespace RogueLike.Classes
 {
     public class Room
     {
-        public int LeftCoord { get; private set; }
-        public int TopCoord { get; private set; }
-        public int RightCoord { get; private set; }
-        public int BottomCoord { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
-        public Item TopLeftCorner { get; private set; } = new Item('┌', true, false, false);
-        public Item TopRightCorner { get; private set; } = new Item('┐', true, false, false);
-        public Item BottomLeftCorner { get; private set; } = new Item('└', true, false, false);
-        public Item BottomRightCorner { get; private set; } = new Item('┘', true, false, false);
-        public Item HorizontalWall { get; private set; } = new Item('─', true, false, false);
-        public Item VerticalWall { get; private set; } = new Item('│', true, false, false);
+        public Wall TopLeft { get; private set; } = new Wall('┌');
+        public Wall TopRight { get; private set; } = new Wall('┐');
+        public Wall BottomLeft { get; private set; } = new Wall('└');
+        public Wall BottomRight { get; private set; } = new Wall('┘');
+        public Wall Horizontal { get; private set; } = new Wall('─');
+        public Wall Vertical { get; private set; } = new Wall('│');
+        public Item Floor { get; private set; } = new Item('·', false, false, false);
         public Dictionary<string, Point> ItemDict { get; private set; } = new Dictionary<string, Point>();
 
 
-        public Room(int leftCoord, int topCoord, int width, int height)
+        public Room(int width, int height)
         {
-            int x = leftCoord;
-            int y = topCoord;
-            LeftCoord = leftCoord;
-            TopCoord = topCoord;
+            int x = 1;
+            int y = 1;
             Width = width;
             Height = height;
-            RightCoord = LeftCoord + Width;
-            BottomCoord = TopCoord + Height;
-            ItemDict[$"{x}|{y}"] = new Point(TopLeftCorner, $"{x}|{y}");
-            for (x++; x < RightCoord; x++)
+            ItemDict[$"{x}|{y}"] = new Point(TopLeft, $"{x}|{y}");
+            for (x++; x <= Width + 1; x++)
             {
-                ItemDict[$"{x}|{y}"] = new Point(HorizontalWall, $"{x}|{y}");
+                ItemDict[$"{x}|{y}"] = new Point(Horizontal, $"{x}|{y}");
             }
-            ItemDict[$"{x}|{y}"] = new Point(TopRightCorner, $"{x}|{y}");
-            for (y++; y < BottomCoord; y++)
+            ItemDict[$"{x}|{y}"] = new Point(TopRight, $"{x}|{y}");
+            for (y++; y <= Height + 1; y++)
             {
-                ItemDict[$"{x}|{y}"] = new Point(VerticalWall, $"{x}|{y}");
+                ItemDict[$"{x}|{y}"] = new Point(Vertical, $"{x}|{y}");
             }
-            ItemDict[$"{x}|{y}"] = new Point(BottomRightCorner, $"{x}|{y}");
-            for (x--; x > LeftCoord; x--)
+            ItemDict[$"{x}|{y}"] = new Point(BottomRight, $"{x}|{y}");
+            for (x--; x > 1; x--)
             {
-                ItemDict[$"{x}|{y}"] = new Point(HorizontalWall, $"{x}|{y}");
+                ItemDict[$"{x}|{y}"] = new Point(Horizontal, $"{x}|{y}");
             }
-            ItemDict[$"{x}|{y}"] = new Point(BottomLeftCorner, $"{x}|{y}");
-            for (y--; y > TopCoord; y--)
+            ItemDict[$"{x}|{y}"] = new Point(BottomLeft, $"{x}|{y}");
+            for (y--; y > 1; y--)
             {
-                ItemDict[$"{x}|{y}"] = new Point(VerticalWall, $"{x}|{y}");
+                ItemDict[$"{x}|{y}"] = new Point(Vertical, $"{x}|{y}");
             }
-            for (y++; y < BottomCoord; y++)
+            for (y++; y <= Height + 1; y++)
             {
-                for (int tx = x + 1; tx < RightCoord; tx++)
+                for (int tx = x + 1; tx <= Width + 1; tx++)
                 {
-                    ItemDict[$"{tx}|{y}"] = new Point($"{tx}|{y}");
+                    ItemDict[$"{tx}|{y}"] = new Point(Floor, $"{tx}|{y}");
                 }
             }
         }
+        //todo add AddDoor Method
+        public bool AddDoor(string coordinate)
+        {
+            Wall wall = new Wall('|');
+            int[] coordinates = new int[2];
+            coordinates[0] = int.Parse(coordinate.Split("|")[0]);
+            coordinates[1] = int.Parse(coordinate.Split("|")[1]);
+            if (ItemDict.ContainsKey(coordinate) && ((coordinates[0] == 1 || coordinate[0] == Width + 2)
+                ^ (coordinates[1] == 1 || coordinates[1] == Height + 2)))
+            {
+                //todo Add AssignDoorframe method (int x, int y)
+                ////Vertical
+                //if (coordinates[0] == 1 || coordinate[0] == Width + 2)
+                //{
+                //    //Below
+                //    if (ItemDict[$"{coordinates[0]}|{coordinates[1] + 1}"].GetType().Name == "Vertical")
+                //    {
+                //        //Left
+                //        if (coordinates[0] == 1)
+                //        {
+                //            ItemDict[$"{coordinates[0]}|{coordinates[1] + 1}"] = new Point(TopRight, $"{coordinates[0]}|{coordinates[1] + 1}");
+                //        }
+                //        //Right
+                //        else
+                //        {
+                //            ItemDict[$"{coordinates[0]}|{coordinates[1] + 1}"] = new Point(TopLeft, $"{coordinates[0]}|{coordinates[1] + 1}");
+                //        }
+                //    }
+                //    //Above
+                //    if (ItemDict[$"{coordinates[0]}|{coordinates[1] - 1}"].GetType().Name == "Vertical")
+                //    {
+                //        //Left
+                //        if (coordinates[0] == 1)
+                //        {
+                //            ItemDict[$"{coordinates[0]}|{coordinates[1] + 1}"] = new Point(TopRight, $"{coordinates[0]}|{coordinates[1] + 1}");
+                //        }
+                //        //Right
+                //        else
+                //        {
+                //            ItemDict[$"{coordinates[0]}|{coordinates[1] + 1}"] = new Point(TopLeft, $"{coordinates[0]}|{coordinates[1] + 1}");
+                //        }
+                //}
+                //}
+                return true;
+            }
+            return false;
+        }
+
+        //todo add AddItem Method
     }
 }
