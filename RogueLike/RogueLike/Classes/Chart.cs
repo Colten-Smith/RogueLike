@@ -80,6 +80,14 @@ namespace RogueLike.Classes
                 return false;
             }
         }
-
+        public void UpdateChart(string startCoordinate, string EndCoordinate)
+        {
+            
+        }
+        public bool IsLocationValid(string coordinate)
+        {
+            return MappedItems.ContainsKey(coordinate);
+        }
+        //TODO Create GetItemType Method
     }
 }

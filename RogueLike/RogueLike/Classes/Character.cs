@@ -12,7 +12,8 @@ namespace RogueLike.Classes
         public int NumberOfKeys { get; private set; }
         public int Coins { get; private set; }
         public bool IsInvincible { get; private set; }
-        public Character(int x, int y, char sprite = 'i', int health = 3, int numberOfKeys = 0, int coins = 0, bool isInvincible = false) 
+        public bool IsAlive { get; private set; }
+        public Character(int x, int y, char sprite = 'i', int health = 3, int numberOfKeys = 0, int coins = 0, bool isInvincible = false, bool isAlive = true)
             : base(x, y, sprite)
         {
             Health = health;
@@ -24,9 +25,16 @@ namespace RogueLike.Classes
 
         //TODO Finish Character Methods
 
-        public void TakeDamage()
+        public bool TakeDamage()
         {
             Health--;
+            if (Health <= 0)
+            {
+                Die();
+                Health = 0;
+                return false;
+            }
+            return true;
         }
         public void Heal()
         {
@@ -40,9 +48,34 @@ namespace RogueLike.Classes
         {
             NumberOfKeys++;
         }
-        public void Move(string direction, Chart chart) { }
-        private void MoveBlock(string direction, Chart chart) { }
-        public void GetInvincibility() 
+        //todo Character Move
+        public void Move(char direction, Chart currentWorkingChart)
+        {
+            int newX = X_Position;
+            int newY = Y_Position;
+            if (direction == 'W')
+            {
+                newY--;
+            }
+            else if (direction == 'A')
+            {
+                newX--;
+            }
+            else if (direction == 'S')
+            {
+                newY++;
+            }
+            else if (direction == 'D')
+            {
+                newX++;
+            }
+            if (currentWorkingChart.IsLocationValid($"{newX}|{newY}"))
+            {
+                string finalCoordinates = DecideAction(newX, newY, currentWorkingChart);
+            }
+        }
+        private void MoveBlock(char direction, Chart chart) { }
+        public void GetInvincibility()
         {
             IsInvincible = true;
         }
@@ -57,6 +90,14 @@ namespace RogueLike.Classes
         public void LoseCoin()
         {
             Coins--;
+        }
+        public void Die()
+        {
+            //todo Character Die
+        }
+        private string DecideAction(int newX, int newY, Chart currentWorkingChart)
+        {
+            //TODO Create DecideAction Method
         }
     }
 }
