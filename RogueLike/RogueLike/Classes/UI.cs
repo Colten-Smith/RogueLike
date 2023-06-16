@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 
 namespace RogueLike.Classes
 {
-    public class UI
+    public static class UI
     {
-        public int[] PlaneSizeMax = { 133, 27 };
-        public void DisplayPlane(Plane plane)
+        public static void DisplayChart(Chart chart)
         {
-            Console.Clear();
-            Console.WriteLine(plane.GetPlaneDisplay());
+            Display(chart.GetSprites());
+        }
+        public static void Display(List<string> listToDisplay)
+        {
+            foreach(string line in listToDisplay)
+            {
+                Console.WriteLine(line);
+            }
+        }
+        public static void Display(string stringToDisplay)
+        {
+            Console.WriteLine(stringToDisplay);
         }
     }
 }

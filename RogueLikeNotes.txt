@@ -1,14 +1,7 @@
-Nouns
-    Wall ┌ ┘ ─ └ ┐
-    Door ] [ ┌─┐ └─┘
-    Key ? 
-    Lock %  
-    Player @
-    Space
-    UI
-    Map
-
-    Visual Info
-    Displayable
-
-Verbs
+Items
+    Wall
+    Floor
+    Spikes
+    Block
+    
+Map

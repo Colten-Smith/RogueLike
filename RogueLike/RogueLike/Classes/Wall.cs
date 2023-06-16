@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace RogueLike.Classes
 {
-    //todo create player item
-    public class Player : Item
+    public class Wall : Item
     {
-        public Player() : base('@', true, true, false)
-        {
-
-        }
+        public Wall(int x, int y, char sprite = '─') : base(x, y, sprite) { }
     }
 }

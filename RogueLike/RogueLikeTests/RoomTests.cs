@@ -10,17 +10,16 @@ namespace RogueLikeTests
     [TestClass]
     public class RoomTests
     {
-        [TestMethod]
-        [DataRow(10, 10, "1|2", true)]
-        [DataRow(10, 10, "2|1", true)]
-        [DataRow(1, 1, "2|3", true)]
-        [DataRow(15, 12, "15|12", false)]
-        [DataRow(27, 14, "1|1", false)]
-        
-        public void AddDoorTests_HappyPath(int width, int height, string coordinate, bool expected)
+        [DataTestMethod]
+        [DataRow(10, 10, 1, 2, true)]
+        [DataRow(10, 10, 2, 1, true)]
+        [DataRow(1, 1, 2, 3, true)]
+        [DataRow(15, 12, 15, 12, false)]
+        [DataRow(27, 14, 1, 1, false)]
+        public void AddDoorTests_HappyPath(int width, int height, int x, int y, bool expected)
         {
             Room room = new Room(width, height);
-            bool actual = room.AddDoor(coordinate);
+            bool actual = room.AddDoor(x, y);
             Assert.AreEqual(expected, actual);
         }
     }
