@@ -32,5 +32,13 @@ namespace RogueLike.Classes.Managers
             //TODO Build Level Run Method
             return true;
         }
+        public Location GetLocation(string coordinate)
+        {
+            return Space.GetLocation(coordinate);
+        }
+        public Location GetLocation(int x, int y)
+        {
+            return Space.GetLocation(x, y);
+        }
     }
 }

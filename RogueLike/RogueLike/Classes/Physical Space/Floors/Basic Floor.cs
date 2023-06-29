@@ -13,14 +13,14 @@ namespace RogueLike.Classes.Physical_Space.Floors
         /// <summary>
         /// A floor that any item can rest on.
         /// </summary>
-        public Basic_Floor() : base(' ', new List<DataType>())
+        public Basic_Floor() : base(' ', new List<Type>().ToArray())
         {
             
         }
         
         //Methods//
         //#########//
-        public override bool CanBeMovedOnBy(Item itemToMove)
+        public override bool CanBeMovedOnBy(Type typeOfItemToMove)
         {
             return true;
         }

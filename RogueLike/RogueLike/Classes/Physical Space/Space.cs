@@ -94,5 +94,21 @@ namespace RogueLike.Classes.Physical_Space
             }
             return false;
         }
+        public Location GetLocation(string coordinate)
+        {
+            if (PossibleLocations.ContainsKey(coordinate))
+            {
+                return PossibleLocations[coordinate];
+            }
+            return null;
+        }
+        public Location GetLocation(int x, int y)
+        {
+            if (PossibleLocations.ContainsKey($"{x},{y}"))
+            {
+                return PossibleLocations[$"{x},{y}"];
+            }
+            return null;
+        }
     }
 }

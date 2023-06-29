@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RogueLike.Classes.Physical_Space.Items;
 using RogueLike.Classes.Physical_Space.Floors;
+using System.Net.Http.Headers;
 
 namespace RogueLike.Classes.Physical_Space
 {
@@ -92,6 +93,25 @@ namespace RogueLike.Classes.Physical_Space
         public Item GetItem()
         {
             return Item;
+        }
+        public Floor GetFloor()
+        {
+            return Floor;
+        }
+        public Item SwapItem(Item newItem)
+        {
+            Item oldItem = Item;
+            Item = newItem;
+            return oldItem;
+        }
+        public bool SwapItems(Location locationToSwapItems, bool overrideAirCheck = false)
+        {
+            if(Item.GetType() == typeof(Air) || locationToSwapItems.Item.GetType() == typeof(Air) || overrideAirCheck)
+            {
+                locationToSwapItems.SwapItem(SwapItem(locationToSwapItems.Item));
+                return true;
+            }
+            return false;
         }
     }
 }

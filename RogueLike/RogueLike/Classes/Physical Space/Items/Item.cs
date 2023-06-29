@@ -13,22 +13,21 @@ namespace RogueLike.Classes.Physical_Space.Items
         //############//
 
         public char Sprite { get; private set; }
-        /// <summary>
-        /// </summary>
-        protected List<DataType> InteractableTypes { get; private set; }
+        protected abstract Type[] InteractableTypes { get; set; }
+        protected abstract Type[] MoveableItems { get; set; }
 
         //Constructors//
         //##############//
 
-        public Item(char sprite, List<DataType> interactables)
+        public Item(char sprite)
         {
             Sprite = sprite;
-            InteractableTypes = interactables;
         }
 
         //Methods//
         //#########//
 
-        public abstract bool InteractWith(Item interactingItem);
+        public abstract bool CanInteractWith(Type interactingItemType);
+        public abstract bool CanBeMovedTo(Type interactingItemType);
     }
 }

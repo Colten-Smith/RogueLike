@@ -14,12 +14,12 @@ namespace RogueLike.Classes.Physical_Space.Floors
         //############//
 
         public char Sprite { get; private set; }
-        protected List<DataType> ImmoveableItems { get; private set; }
+        protected Type[] ImmoveableItems { get; private set; }
 
         //Constructor
         //#############//
 
-        public Floor(char sprite, List<DataType> moveables)
+        public Floor(char sprite, Type[] moveables)
         {
             Sprite = sprite;
             ImmoveableItems = moveables;
@@ -28,6 +28,6 @@ namespace RogueLike.Classes.Physical_Space.Floors
         //Methods//
         //#########//
 
-        public abstract bool CanBeMovedOnBy(Item itemToMove);
+        public abstract bool CanBeMovedOnBy(Type typeOfItemToMove);
     }
 }
