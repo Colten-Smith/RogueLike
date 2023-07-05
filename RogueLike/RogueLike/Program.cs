@@ -13,11 +13,24 @@ namespace RogueLike
     {
         static void Main(string[] args)
         {
-
-            return;
+            //TODO Find out how to implement the timer
             //Scratch Code//
 
+            //System.Timers.Timer testTimer = new System.Timers.Timer(1000 / 10);
+            //testTimer.AutoReset = true;
+            //testTimer.Elapsed += Tick;
+            //testTimer.Start();
+            //while (testTimer.Enabled)
+            //{
+            //    if (Console.KeyAvailable)
+            //    {
+            //        testTimer.Stop();
+            //        testTimer.Dispose();
+            //    }
+            //}
             
+
+
             //Space testSpace = new Space(30, 30);
             //Person playerCharacter = new Person();
             //int playerX = 1;
@@ -33,5 +46,10 @@ namespace RogueLike
 
 
         }
+
+        //private static void Tick(object? sender, System.Timers.ElapsedEventArgs e)
+        //{
+        //    Console.WriteLine("A");
+        //}
     }
 }

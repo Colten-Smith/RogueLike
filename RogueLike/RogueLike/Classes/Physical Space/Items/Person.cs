@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RogueLike.Classes.Physical_Space.Items.Spikes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -109,6 +110,10 @@ namespace RogueLike.Classes.Physical_Space.Items
             if (whereToLook.GetItem().CanInteractWith(GetType()))
             {
                 // TODO Interact(whereToLook);
+                if(whereToLook.GetItem().GetType() == typeof(Spike) || whereToLook.GetItem().GetType().IsSubclassOf(typeof(Spike)))
+                {
+                    TakeDamage();
+                }
                 return true;
             }
             return false;
